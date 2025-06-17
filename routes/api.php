@@ -8,12 +8,12 @@ use App\Http\Controllers\Api\ProjectController;
 Route::post('login',    [AuthController::class, 'login']); // Login route   
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+Route::post('register', [ AuthController::class, 'createUser']); // Register route 
 Route::prefix('auth/')
     ->controller(AuthController::class)
     ->group(function () { // Protected routes
     Route::get('users', 'getAllUsers'); // Get all users route
     Route::get('me','getConnected'); // Get authenticated/connected user
-    Route::post('register', 'createUser'); // Register route 
     Route::post('/change-password', 'changePassword'); // Change password route
     Route::put('update-profile', 'updateProfile'); // Update profile route
     Route::post('logout','logout'); // Logout route

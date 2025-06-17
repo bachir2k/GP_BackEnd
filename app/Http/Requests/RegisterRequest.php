@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email', // Vérification si l'utilisateur est déjà inscrit
             'password' => 'required|min:8',
-            'description' => 'required|string|min:8',
+            'description' => 'required|string|min:5',
             'phone'   => 'required|string|max:255|unique:users,phone',
             'profils'   => 'array',
             'profils.*' => 'exists:profils,id', // Vérification si le profil existe
