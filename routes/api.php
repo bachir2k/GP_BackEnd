@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\Api\ActiviteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ComposanteController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\SousComposanteController;
 
 Route::post('login',    [AuthController::class, 'login']); // Login route   
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::post('register', [ AuthController::class, 'createUser']); // Register route 
+
 Route::prefix('auth/')
     ->controller(AuthController::class)
     ->group(function () { // Protected routes
@@ -36,6 +40,36 @@ Route::middleware('auth:api')
 Route::prefix('projet/')
     ->middleware('auth:api')
     ->controller(ProjectController::class)
+    ->group(function () {
+    Route::post('new', 'create');
+    Route::get('all', 'index');
+    Route::put('update/{id}', 'update');
+    Route::delete('delete/{id}', 'delete');
+});
+
+Route::prefix('composante/')
+    ->middleware('auth:api')
+    ->controller(ComposanteController::class)
+    ->group(function () {
+    Route::post('new', 'create');
+    Route::get('all', 'index');
+    Route::put('update/{id}', 'update');
+    Route::delete('delete/{id}', 'delete');
+});
+
+Route::prefix('souscomposante/')
+    ->middleware('auth:api')
+    ->controller(SousComposanteController::class)
+    ->group(function () {
+    Route::post('new', 'create');
+    Route::get('all', 'index');
+    Route::put('update/{id}', 'update');
+    Route::delete('delete/{id}', 'delete');
+});
+
+Route::prefix('activite/')
+    ->middleware('auth:api')
+    ->controller(ActiviteController::class)
     ->group(function () {
     Route::post('new', 'create');
     Route::get('all', 'index');
