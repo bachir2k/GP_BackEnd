@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('souscomposantes', function (Blueprint $table) {
+        Schema::create('mparamagregs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_composante')->constrained()->onDelete('cascade');
-            $table->string('code_souscomposante');
-            $table->string('nom_souscomposante');
-            $table->string('observation')->nullable();
+            $table->string('nom_parametre');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('souscomposantes');
+        Schema::dropIfExists('mparamagregs');
     }
 };

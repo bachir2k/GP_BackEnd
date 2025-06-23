@@ -17,7 +17,7 @@ class StoreSousComposanteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'composante' => 'string|max:255|',
+            'id_composante'       => 'required|integer|exists:composantes,id',
             'code_souscomposante' => 'required|string|max:255|',
             'nom_souscomposante' => 'required|string|max:255|',
             'observation' => 'nullable|string|max:255',

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Project;
+namespace App\Http\Requests\Projet;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProjectRequest extends FormRequest
+class StoreProjetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,7 +17,7 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ref_projet' => 'required|string|max:255|unique:projects,ref_projet',
+            'ref_projet' => 'required|string|max:255|unique:projets,ref_projet',
             'nom_projet' => 'nullable|string|max:255',
             'Debut' => 'required|date_format:Y-m-d',
             'Fin' => 'required|date_format:Y-m-d|after_or_equal:Debut',

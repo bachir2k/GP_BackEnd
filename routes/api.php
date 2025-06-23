@@ -4,8 +4,11 @@ use App\Http\Controllers\Api\ActiviteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ComposanteController;
+use App\Http\Controllers\Api\IndicateurController;
+use App\Http\Controllers\Api\MparamagregController;
+use App\Http\Controllers\Api\ParamagregController;
+use App\Http\Controllers\Api\ProjetController;
 use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SousComposanteController;
 
 Route::post('login',    [AuthController::class, 'login']); // Login route   
@@ -39,7 +42,7 @@ Route::middleware('auth:api')
 
 Route::prefix('projet/')
     ->middleware('auth:api')
-    ->controller(ProjectController::class)
+    ->controller(ProjetController::class)
     ->group(function () {
     Route::post('new', 'create');
     Route::get('all', 'index');
@@ -70,6 +73,36 @@ Route::prefix('souscomposante/')
 Route::prefix('activite/')
     ->middleware('auth:api')
     ->controller(ActiviteController::class)
+    ->group(function () {
+    Route::post('new', 'create');
+    Route::get('all', 'index');
+    Route::put('update/{id}', 'update');
+    Route::delete('delete/{id}', 'delete');
+});
+
+Route::prefix('indicateur/')
+    ->middleware('auth:api')
+    ->controller(IndicateurController::class)
+    ->group(function () {
+    Route::post('new', 'create');
+    Route::get('all', 'index');
+    Route::put('update/{id}', 'update');
+    Route::delete('delete/{id}', 'delete');
+});
+
+Route::prefix('mparamagreg/')
+    ->middleware('auth:api')
+    ->controller(MparamagregController::class)
+    ->group(function () {
+    Route::post('new', 'create');
+    Route::get('all', 'index');
+    Route::put('update/{id}', 'update');
+    Route::delete('delete/{id}', 'delete');
+});
+
+Route::prefix('paramagreg/')
+    ->middleware('auth:api')
+    ->controller(ParamagregController::class)
     ->group(function () {
     Route::post('new', 'create');
     Route::get('all', 'index');

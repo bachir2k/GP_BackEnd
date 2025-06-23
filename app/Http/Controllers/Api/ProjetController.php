@@ -3,33 +3,29 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Project\StoreProjectRequest;
-use App\Http\Requests\Project\UpdateProjectRequest;
-use App\Repositories\ProjectRepository;
+use App\Http\Requests\Projet\StoreProjetRequest;
+use App\Http\Requests\Projet\UpdateProjetRequest;
+use App\Repositories\ProjetRepository;
+use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+
+class ProjetController extends Controller
 {
-    
-
-    public function __construct(protected ProjectRepository $projectRepo)
-    {
-
-    }
-
+    public function __construct(protected ProjetRepository $projetRepo) {}
 
     public function index()
     {
-        $projects = $this->projectRepo->all();
+        $projets = $this->projetRepo->all();
 
         return response()->json([
             'success' => true,
-            'data' => $projects
+            'data' => $projets
         ]);
     }
 
-    public function create(StoreProjectRequest $request)
+     public function create(StoreProjetRequest $request)
     {
-        $projet = $this->projectRepo->create($request->validated());
+        $projet = $this->projetRepo->create($request->validated());
 
         return response()->json([
             'success' => true,
@@ -38,24 +34,24 @@ class ProjectController extends Controller
         ], 201);
     }
 
-    public function update(UpdateProjectRequest $request, $id)
+    public function update(UpdateProjetRequest $request, $id)
     {
-        $project = $this->projectRepo->update($id, $request->validated());
+        $projet = $this->projetRepo->update($id, $request->validated());
 
-        if (!$project) {
+        if (!$projet) {
             return response()->json(['error' => 'Projet non trouvé'], 404);
         }
 
         return response()->json([
             'success' => true,
             'message' => 'Projet mis à jour',
-            'data' => $project
+            'data' => $projet
         ]);
     }
 
     public function delete($id)
     {
-        $deleted = $this->projectRepo->delete($id);
+        $deleted = $this->projetRepo->delete($id);
 
         if (!$deleted) {
             return response()->json(['error' => 'Projet non trouvé'], 404);
@@ -66,5 +62,5 @@ class ProjectController extends Controller
             'message' => 'Projet supprimé avec succès'
         ]);
     }
+    
 }
-

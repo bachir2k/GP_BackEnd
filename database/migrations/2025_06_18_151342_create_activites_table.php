@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('activites', function (Blueprint $table) {
             $table->id();
-             $table->string('composante')->nullable();
-            $table->string('souscomposante')->nullable();
+            $table->foreignId('id_souscomposante')->constrained()->onDelete('cascade');
             $table->string('code_activite');
-            $table->string('nom_acivite');
+            $table->string('nom_activite');
             $table->boolean('type');
             $table->boolean('rationnel');
             $table->boolean('acivite_impact');
             $table->boolean('acivite_marche');
             $table->boolean('evidence_requise');
-            $table->string('observation');
+            $table->string('observation')->nullable();
             $table->timestamps();
         });
     }

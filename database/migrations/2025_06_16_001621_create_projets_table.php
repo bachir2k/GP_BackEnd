@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('souscomposantes', function (Blueprint $table) {
+        Schema::create('projets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_composante')->constrained()->onDelete('cascade');
-            $table->string('code_souscomposante');
-            $table->string('nom_souscomposante');
-            $table->string('observation')->nullable();
+            $table->string('ref_projet');
+            $table->string('nom_projet');
+            $table->date('Debut');
+            $table->date('Fin');
+            $table->integer('nbr_Beneficiaire');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('souscomposantes');
+        Schema::dropIfExists('projets');
     }
 };

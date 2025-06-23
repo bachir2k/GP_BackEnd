@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('paramagregs', function (Blueprint $table) {
             $table->id();
-            $table->string('ref_projet');
-            $table->string('nom_projet');
-            $table->date('Debut');
-            $table->date('Fin');
-            $table->integer('nbr_Beneficiaire');
+            $table->foreignId('id_mparamagreg')->constrained()->onDelete('cascade');
+            $table->string('nom_paramagreg');
+            $table->string('commentaires')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('paramagregs');
     }
 };

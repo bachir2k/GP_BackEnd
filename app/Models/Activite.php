@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Activite extends Model
 {
@@ -11,10 +12,9 @@ class Activite extends Model
     use HasFactory;
 
     protected $fillable = [
-        'composante',
-        'souscomposante',
+        'id_souscomposante',
         'code_activite',
-        'nom_acivite',
+        'nom_activite',
         'type',
         'rationnel',
         'acivite_impact',
@@ -23,4 +23,9 @@ class Activite extends Model
         'observation',
 
     ];
+
+    public function souscomposante() : BelongsTo
+    {
+        return $this->belongsTo(Souscomposante::class);
+    }
 }

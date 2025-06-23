@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('composantes', function (Blueprint $table) {
             $table->id();
+          $table->foreignId('id_projet')->constrained()->onDelete('cascade');
             $table->string('code_composante');
             $table->string('nom_composante');
-            $table->string('observation');
+            $table->string('observation')->nullable();
             $table->timestamps();
         });
     }

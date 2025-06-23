@@ -15,11 +15,13 @@ class StoreComposanteRequest extends FormRequest
     }
 
     public function rules(): array
-    {
-        return [
-            'code_composante' => 'required|string|max:255|',
-            'nom_composante' => 'required|string|max:255|',
-            'observation' => 'nullable|string|max:255',
-        ];
-    }
+{
+    return [
+        'id_projet'       => 'required|integer|exists:projets,id',
+        'code_composante' => 'required|string|max:255',
+        'nom_composante'  => 'required|string|max:255',
+        'observation'     => 'nullable|string|max:255',
+    ];
+}
+
 }

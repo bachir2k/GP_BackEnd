@@ -17,10 +17,10 @@ class StoreActiviteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'composante' => 'string|max:255|',
-            'souscomposante' => 'string|max:255|',
+
+            'id_souscomposante'       => 'required|integer|exists:souscomposantes,id',
             'code_activite' => 'required|string|max:255|',
-            'nom_acivite' => 'required|string|max:255|',
+            'nom_activite' => 'required|string|max:255|',
             'type' => 'boolean',
             'rationnel' => 'boolean',
             'acivite_impact' => 'boolean',
