@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('indicateurs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_projet')->constrained()->onDelete('cascade');
+            $table->foreignId('id_projet')->constrained('projets')->onDelete('cascade');
             $table->string('code_indicateur');
             $table->string('nom_indicateur');
             $table->string('description')->nullable();
             $table->string('methode_calcul')->nullable();
             $table->string('source_verification')->nullable();
             $table->string('commentaires')->nullable();
-            $table->foreignId('id_mparamagreg')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

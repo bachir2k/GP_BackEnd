@@ -32,8 +32,9 @@ Route::middleware('auth:api')
     ->prefix('role/')
     ->controller(RoleController::class)
     ->group(function () {
-    Route::post('','createRole');
+    Route::post('new','createRole');
     Route::get('all','index');
+    Route::get('/permissions-structure', 'getPermissionsStructure');
     Route::get('{role}','showRole');
     Route::put('update/{id}','updateRole');
     Route::delete('delete/{id}','destroyRole');

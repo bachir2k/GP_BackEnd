@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('indicateurs_mparamagregs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_indicateur')->constrained()->onDelete('cascade');
-            $table->foreignId('id_mparamagreg')->constrained()->onDelete('cascade');
+            $table->foreignId('id_indicateur')->constrained('indicateurs')->onDelete('cascade');
+            $table->foreignId('id_mparamagreg')->constrained('mparamagregs')->onDelete('cascade');
             $table->timestamps();
         });
     }

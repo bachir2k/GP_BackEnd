@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Role;
+
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class updateRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,12 +19,13 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules() :array
+    public function rules(): array
     {
         return [
-            // Validation des données d'entrée de l'utilisateur
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required',
+            'name' =>  'required|string', 
+            'description' => 'required|string',
+            'permissions'  => 'array',
+            'permissions.*' => 'exists:permissions,name'
         ];
     }
 }

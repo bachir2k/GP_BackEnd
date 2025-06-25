@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResetPasswordRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,12 +19,12 @@ class ResetPasswordRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules() :array
     {
         return [
+            // Validation des données d'entrée de l'utilisateur
             'email' => 'required|email|exists:users,email',
-            'token' => 'required',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required',
         ];
     }
 }

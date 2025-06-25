@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('souscomposantes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_composante')->constrained()->onDelete('cascade');
+            $table->foreignId('id_composante')->constrained('composantes')->onDelete('cascade');
             $table->string('code_souscomposante');
             $table->string('nom_souscomposante');
             $table->string('observation')->nullable();

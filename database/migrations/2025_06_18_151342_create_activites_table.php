@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('activites', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_souscomposante')->constrained()->onDelete('cascade');
+            $table->foreignId('id_souscomposante')->constrained('souscomposantes')->onDelete('cascade');
             $table->string('code_activite');
             $table->string('nom_activite');
             $table->boolean('type');

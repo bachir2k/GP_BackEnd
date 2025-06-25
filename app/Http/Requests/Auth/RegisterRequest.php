@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,8 +28,8 @@ class RegisterRequest extends FormRequest
             'password' => 'required|min:8',
             'description' => 'required|string|min:5',
             'phone'   => 'required|string|max:255|unique:users,phone',
-            'profils'   => 'array',
-            'profils.*' => 'exists:profils,id', // Vérification si le profil existe
+            // 'profil'   => 'array',
+            // 'profil.*' => 'exists:profil,id', // Vérification si le profil existe
         ];
     }
 
@@ -41,6 +41,7 @@ class RegisterRequest extends FormRequest
             'email.exists' => 'Aucun utilisateur trouvé avec cette adresse e-mail.',
             'password.required' => 'Le mot de passe est obligatoire.',
             'password.min' => 'Le mot de passe doit contenir au moins :min caractères.',
+            
         ];
     }
 }

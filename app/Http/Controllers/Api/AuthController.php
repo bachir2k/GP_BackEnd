@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\AuthRepository;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\AssignRoleRequest;
-use App\Http\Requests\ResetPasswordRequest;
-use App\Http\Requests\UpdateProfileRequest;
-use App\Http\Requests\ChangePasswordRequest;
-use App\Http\Requests\ForgotPasswordRequest;
-use App\Http\Requests\RemoveRoleUserRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Requests\Auth\UpdateProfileRequest;
+use App\Http\Requests\Auth\AssignRoleUserRequest;
+use App\Http\Requests\Auth\ChangePasswordRequest;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
+use App\Http\Requests\Auth\RemoveRoleUserRequest;
 
 class AuthController extends Controller
 {
@@ -89,18 +89,18 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    // // POST /api/assign-role
-    // public function assignRoleToUser(AssignRoleRequest $request)
-    // {
-    //     $this->authRepository->assignRoleToUser($request->validated());
-    //     return response()->json(['message' => 'Role assigned successfully.'], 200);
-    // }
-
-    // // DELETE /api/remove-role
-    // public function removeRoleFromUser(RemoveRoleUserRequest $request)
-    // {
-    //     $this->authRepository->removeRoleFromUser($request->validated());
-    //     return response()->json(['message' => 'Role removed successfully.'], 200);
-    // }
+    // POST /api/assign-role
+    public function assignRoleToUser(AssignRoleUserRequest $request)
+    {
+        $this->authRepository->assignRoleUser($request->validated());
+        return response()->json(['message' => 'Role assigned successfully.'], 200);
+    
+    }
+    // DELETE /api/remove-role
+    public function removeRoleFromUser(RemoveRoleUserRequest $request)
+    {
+        $this->authRepository->removeRoleFromUser($request->validated());
+        return response()->json(['message' => 'Role removed successfully.'], 200);
+    }
     
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,8 +22,8 @@ class RemoveRoleUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
-            'role_id' => 'required|exists:roles,id',
+            'id_user' => 'required|exists:users,id',
+            'id_profil' => 'required|exists:profil,id',
         ];
     }
 }

@@ -2,67 +2,68 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Role;
+use App\Models\User;
+use App\Models\Profil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Repositories\RoleRepository;
+use App\Http\Requests\Role\createRoleRequest;
+use App\Http\Requests\Role\updateRoleRequest;
 
 class RoleController extends Controller
 {
+    public function __construct(protected RoleRepository $roleRepository) {
+
+    }
+
     // POST /api/role/create
     // Create a new role
-    public function createRole(Request $request)
+    public function createRole(createRoleRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|unique:roles'
-        ]);
-
-        $role = Role::create([
-            'name' => $data['name'] // Saisie du nom du rôle
-        ]);
-        return response()->json('Role created successfully', 201);
+        $profil = $this->roleRepository->storeRole($request->validated());
+        return response()->json([
+            'message' => 'Profil créé avec succès',
+            'profil' => $profil,
+        ], 201);
+        
     }
 
-    // GET /api/role/all
-    // Get all roles
+    public function getPermissionsStructure()
+    {
+        return $this->roleRepository->getPermissionsHierarchie();
+        
+    }
+
+    // GET /api/profil/all
+    // Get all profils
     public function index()
     {
-       $roles = Role::all();
-       return $roles;
+        return response()->json($this->roleRepository->all());
     }
 
-    //GET /api/role/show{id}
-    // Get a specific role by ID
-    public function showRole(Role $role){
-        
-        return response()->json($role);
-    }
-
-    // PUT /api/role/update{id}
-    // Modify an existing role by ID
-    public function updateRole(Request $request, $id)
+    //GET /api/profil/show{id}
+    // Get a specific profil by ID with Permissions
+    public function showRole($id)
     {
-        $role = Role::findOrFail($id);
 
-        $data = $request->validate([
-            'name' => 'required|string|unique:roles,name' . $id
-        ]);
-        $role->update($data);
-
-        return response()->json($role);
+        return response()->json($this->roleRepository->displayRole($id));
     }
 
-    // DELETE /api/role/destroy{id}
-    // Delete a role by ID
+    // PUT /api/profil/update{id}
+    // Modify an existing profil by ID
+    public function updateRole($id, updateRoleRequest $request)
+    {
+        $profil = $this->roleRepository->editRole($id, $request->validated());
+        return response()->json([
+            'message' => 'Profil mis à jour avec succès',
+            'profil' => $profil
+        ]);
+    }
+
+    // DELETE /api/profil/destroy{id}
+    // Delete a profil by ID
     public function destroyRole($id)
     {
-        $role = Role::findOrFail($id);
-        $role->delete();
-
-        return response()->json(['message' => 'Role deleted']);
+        return response()->json($this->roleRepository->delRole($id));
     }
-
-      
 }
-
-

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('paramagregs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_mparamagreg')->constrained()->onDelete('cascade');
+            $table->foreignId('id_mparamagreg')->constrained('mparamagregs')->onDelete('cascade');
             $table->string('nom_paramagreg');
             $table->string('commentaires')->nullable();
             $table->timestamps();

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Role;
+use App\Models\Profil;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -125,17 +125,17 @@ class AuthRepository
     }
 
     // // Assign a role to a user
-    // public function assignRoleToUser()
+    // public function assignRoleUser(array $request)
     // {   
-    //     $user = User::find($request['user_id']);
-    //     $user->roles()->sync($request->roles);
-    // }
-
+    //     $user = User::find($request['id_user']);
+    //     $user->profil()->sync($request['id_profil']); // false to avoid detaching existing roles
+    // }   
+    
     // // Remove a role from a user
-    // public function removeRoleFromUser()
+    // public function removeRoleFromUser(array $request)
     // {
-    //     $user = User::find($request['user_id']);
-    //     $user->roles()->detach($request['role_id']);
+    //     $user = User::find($request['id_user']);
+    //     $user->profil()->detach($request['id_profil']);
     // }
     
 }
