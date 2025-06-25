@@ -28,8 +28,7 @@ class RegisterRequest extends FormRequest
             'password' => 'required|min:8',
             'description' => 'required|string|min:5',
             'phone'   => 'required|string|max:255|unique:users,phone',
-            // 'profil'   => 'array',
-            // 'profil.*' => 'exists:profil,id', // Vérification si le profil existe
+            'id_profil'   => 'required|exists:profil,id', // ✅ correction ici
         ];
     }
 

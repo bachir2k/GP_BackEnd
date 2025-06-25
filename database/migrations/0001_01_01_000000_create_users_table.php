@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('identifiant');
             $table->foreignId('id_profil')->constrained('profil')->onDelete('cascade'); // Default role set to 'user'
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email', 191)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone');
             $table->string('description');

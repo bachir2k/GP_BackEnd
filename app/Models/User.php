@@ -28,7 +28,6 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'phone',
         'description',
-        'profil',
     ];
 
     // 1️⃣ Obligatoire : identifiant unique pour le JWT
